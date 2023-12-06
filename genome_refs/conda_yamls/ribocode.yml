@@ -1,0 +1,6 @@
+name: sample-dataset-creation_ribocode
+channels:
+  - defaults
+  - bioconda
+dependencies:
+  - ribocode

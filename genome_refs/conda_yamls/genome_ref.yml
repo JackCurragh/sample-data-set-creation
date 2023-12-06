@@ -1,0 +1,6 @@
+name: sample-dataset-creation_genome-ref
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pip

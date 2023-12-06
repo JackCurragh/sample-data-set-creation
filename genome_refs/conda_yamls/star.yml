@@ -1,0 +1,6 @@
+name: sample-dataset-creation_star
+channels:
+  - defaults
+  - bioconda
+dependencies:
+  - star

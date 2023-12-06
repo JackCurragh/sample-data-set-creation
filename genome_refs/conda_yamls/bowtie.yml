@@ -1,0 +1,6 @@
+name: sample-dataset-creation_bowtie
+channels:
+  - defaults
+  - bioconda
+dependencies:
+  - bowtie
