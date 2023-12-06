@@ -1,4 +1,3 @@
 
-#data/HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
+#data/full_HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
 #read_length	proportion(per total mapped reads)	predicted_psite	f0_sum	f1_sum	f2_sum	f0_percent	pvalue1	pvalue2	pvalue_combined
-

@@ -93,5 +93,48 @@ Check RiboCode Periodicity:
 conda create -f conda_yamls/ribocode.yml
 conda activate sample-dataset-creation_ribocode
 
+prepare_transcripts -g data/chr12.gtf -f data/chr12.genome.fasta -o data/ribocode_annotation
+metaplots -a data/ribocode_annotation -r data/HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
+
 ```
 
+This failed for `chr12:6,487,526-6,616,396`. Need to scale up to increase depth on metagene
+
+Rerun with full chr22 as it is smallest
+```bash
+CHR="chr22"
+grep $CHR data/gencode.v44.annotation.gtf > data/${CHR}_gencode_v44.annotation.gtf
+
+conda activate sample-dataset-creation_star
+
+STAR --runThreadN 8 --genomeSAindexNbases 11 --runMode genomeGenerate --genomeDir data/STAR/chr22_genome_index --genomeFastaFiles data/full_chr22.genome.fasta --sjdbGTFfile data/chr22.gtf
+
+STAR --outFilterType BySJout --runThreadN 8 --outFilterMismatchNmax 2 --genomeDir data/STAR/chr22_genome_index --readFilesIn data/SRR1630831.lessrRNA.fq  --outFileNamePrefix data/chr22_HEK_RiboSeq_nf_core_genome --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM GeneCounts --outFilterMultimapNmax 1 --outFilterMatchNmin 16 --alignEndsType EndToEnd
+conda deactivate
+
+conda activate sample-dataset-creation_ribocode
+prepare_transcripts -g data/chr22.gtf -f data/full_chr22.genome.fasta -o data/chr22_ribocode_annotation
+metaplots -a data/chr22_ribocode_annotation -r data/chr22_HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
+conda deactivate
+
+```
+
+Again failed... 
+
+Rerun with full genome 
+```bash
+gzip -d data/GRCh38.primary_assembly.genome.fa.gz --keep
+
+conda activate sample-dataset-creation_star
+
+STAR --runThreadN 8 --genomeSAindexNbases 11 --runMode genomeGenerate --genomeDir data/STAR/full_genome_index --genomeFastaFiles data/GRCh38.primary_assembly.genome.fa --sjdbGTFfile data/gencode.v44.annotation.gtf
+
+STAR --outFilterType BySJout --runThreadN 8 --outFilterMismatchNmax 2 --genomeDir data/STAR/full_genome_index --readFilesIn data/SRR1630831.lessrRNA.fq  --outFileNamePrefix data/full_HEK_RiboSeq_nf_core_genome --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM GeneCounts --outFilterMultimapNmax 1 --outFilterMatchNmin 16 --alignEndsType EndToEnd
+conda deactivate
+
+conda activate sample-dataset-creation_ribocode
+prepare_transcripts -g data/gencode.v44.annotation.gtf -f data/GRCh38.primary_assembly.genome.fa -o data/full_ribocode_annotation
+metaplots -a data/full_ribocode_annotation -r data/full_HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
+conda deactivate
+
+```
