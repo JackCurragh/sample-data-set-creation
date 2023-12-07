@@ -127,9 +127,9 @@ gzip -d data/GRCh38.primary_assembly.genome.fa.gz --keep
 
 conda activate sample-dataset-creation_star
 
-STAR --runThreadN 8 --genomeSAindexNbases 11 --runMode genomeGenerate --genomeDir data/STAR/full_genome_index --genomeFastaFiles data/GRCh38.primary_assembly.genome.fa --sjdbGTFfile data/gencode.v44.annotation.gtf
+STAR --runThreadN 60 --genomeSAindexNbases 11 --runMode genomeGenerate --genomeDir data/STAR/full_genome_index --genomeFastaFiles data/GRCh38.primary_assembly.genome.fa --sjdbGTFfile data/gencode.v44.annotation.gtf
 
-STAR --outFilterType BySJout --runThreadN 8 --outFilterMismatchNmax 2 --genomeDir data/STAR/full_genome_index --readFilesIn data/SRR1630831.lessrRNA.fq  --outFileNamePrefix data/full_HEK_RiboSeq_nf_core_genome --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM GeneCounts --outFilterMultimapNmax 1 --outFilterMatchNmin 16 --alignEndsType EndToEnd
+STAR --outFilterType BySJout --runThreadN 60 --outFilterMismatchNmax 2 --genomeDir data/STAR/full_genome_index --readFilesIn data/SRR1630831.lessrRNA.fq  --outFileNamePrefix data/full_HEK_RiboSeq_nf_core_genome --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM GeneCounts --outFilterMultimapNmax 1 --outFilterMatchNmin 16 --alignEndsType EndToEnd
 conda deactivate
 
 conda activate sample-dataset-creation_ribocode
@@ -138,3 +138,4 @@ metaplots -a data/full_ribocode_annotation -r data/full_HEK_RiboSeq_nf_core_geno
 conda deactivate
 
 ```
+This worked. Very weird. The metaplots for the subsetted attempts were very sparse which is no-doubt why the tool fails but there is still something strange
