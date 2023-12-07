@@ -80,7 +80,7 @@ Align to Genome:
 ```bash
 conda activate sample-dataset-creation_star
 
-STAR --outFilterType BySJout --runThreadN 8 --outFilterMismatchNmax 2 --genomeDir data/STAR/genome_index --readFilesIn data/SRR1630831.lessrRNA.fq  --outFileNamePrefix data/HEK_RiboSeq_nf_core_genome --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM GeneCounts --outFilterMultimapNmax 1 --outFilterMatchNmin 16 --alignEndsType EndToEnd
+STAR --outFilterType BySJout --runThreadN 8 --outFilterMismatchNmax 2 --genomeDir data/STAR/genome_index --readFilesIn data/SRR1630831.lessrRNA.fq  --outFileNamePrefix data/chr12_subset_HEK_RiboSeq_nf_core_genome --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM GeneCounts --outFilterMultimapNmax 1 --outFilterMatchNmin 16 --alignEndsType EndToEnd
 ```
 
 Check alignments:
@@ -94,7 +94,7 @@ conda create -f conda_yamls/ribocode.yml
 conda activate sample-dataset-creation_ribocode
 
 prepare_transcripts -g data/chr12.gtf -f data/chr12.genome.fasta -o data/ribocode_annotation
-metaplots -a data/ribocode_annotation -r data/HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
+metaplots -a data/ribocode_annotation -r data/chr12_HEK_RiboSeq_nf_core_genomeAligned.toTranscriptome.out.bam
 
 ```
 
