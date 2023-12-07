@@ -72,8 +72,8 @@ Remove rRNA (Thanks to RiboCode Devs rRNA is [here](https://github.com/xryanglab
 conda create -f conda_yamls/bowtie.yml
 conda activate sample-dataset-creation_bowtie
 
-bowtie-build data/rRNA.fa rRNA
-bowtie -p 8 -norc --un data/SRR1630831.lessrRNA.fq -q data/SRR1630831.fastq.gz data/rRNA data/HEK_RiboSeq_rRNA_reads.sam
+bowtie-build data/rRNA.fa data/rRNA
+bowtie -p 8 data/rRNA -norc --un data/SRR1630831.lessrRNA.fq -q data/SRR1630831.fastq.gz data/HEK_RiboSeq_rRNA_reads.sam
 ```
 
 Align to Genome:
